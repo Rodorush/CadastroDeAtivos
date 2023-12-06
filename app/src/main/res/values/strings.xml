@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Cadastro de Ativos</string>
+    <string name="ativos">Ativos</string>
+    <string name="novo_ativo">Novo ativo</string>
+    <string name="sigla">Sigla</string>
+    <string name="nome">Nome</string>
+    <string name="mercado">Mercado</string>
+    <string name="nome_do_ativo">Nome do Ativo</string>
+    <string name="mercado_do_ativo">Mercado do Ativo</string>
+    <string name="sigla_do_ativo">Sigla do Ativo</string>
+    <string name="salvar">Salvar</string>
 </resources>

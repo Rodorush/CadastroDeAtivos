@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/listaAtivosFragment">
+
+    <fragment
+        android:id="@+id/listaAtivosFragment"
+        android:name="br.com.rodorush.cadastrodeativos.ui.ListaAtivosFragment"
+        android:label="@string/ativos"
+        tools:layout="@layout/fragment_lista_ativos" >
+        <action
+            android:id="@+id/action_listaAtivosFragment_to_cadastroFragment"
+            app:destination="@id/cadastroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cadastroFragment"
+        android:name="br.com.rodorush.cadastrodeativos.ui.CadastroFragment"
+        android:label="@string/novo_ativo"
+        tools:layout="@layout/fragment_cadastro" />
+</navigation>
