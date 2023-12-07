@@ -12,11 +12,13 @@ import kotlinx.coroutines.launch
 
 class AtivoViewModel(application: Application): AndroidViewModel(application) {
     private val repository: AtivoRepository
+    var allAssets: LiveData<List<Ativo>>
     lateinit var ativo: LiveData<Ativo>
 
     init {
         val dao = AtivoDatabase.getDatabase(application).ativoDAO()
         repository = AtivoRepository(dao)
+        allAssets = repository.getAllAssets()
     }
 
     fun insert(ativo: Ativo) = viewModelScope.launch(Dispatchers.IO) {
