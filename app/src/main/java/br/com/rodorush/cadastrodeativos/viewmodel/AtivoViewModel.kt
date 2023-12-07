@@ -24,4 +24,10 @@ class AtivoViewModel(application: Application): AndroidViewModel(application) {
     fun insert(ativo: Ativo) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(ativo)
     }
+
+    fun getAssetById(id: Int) {
+        viewModelScope.launch {
+            ativo = repository.getAssetById(id)
+        }
+    }
 }

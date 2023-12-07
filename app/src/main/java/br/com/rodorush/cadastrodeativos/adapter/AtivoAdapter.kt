@@ -11,12 +11,19 @@ class AtivoAdapter():
     RecyclerView.Adapter<AtivoAdapter.AtivoViewHolder>() {
 
         private lateinit var binding: AtivoCelulaBinding
+
         var ativosLista = ArrayList<Ativo>()
+        var listener: AtivoListener? = null
+        var ativosListaFilterable = ArrayList<Ativo>()
 
     fun updateList(newList: ArrayList<Ativo> ) {
         ativosLista = newList
-//        ativosListaFilterable = ativosLista
+        ativosListaFilterable = ativosLista
         notifyDataSetChanged()
+    }
+
+    fun setClickLestener(listener: AtivoListener) {
+        this.listener = listener
     }
 
     override fun onCreateViewHolder(
@@ -36,9 +43,18 @@ class AtivoAdapter():
         return ativosLista.size
     }
 
-    inner class AtivoViewHolder(view:AtivoCelulaBinding): RecyclerView.ViewHolder(view.root)
-    {
+    inner class AtivoViewHolder(view:AtivoCelulaBinding): RecyclerView.ViewHolder(view.root) {
         val siglaVH = view.sigla
         val nomeVH = view.nome
+
+        init {
+            view.root.setOnClickListener {
+                listener?.onItemClick(adapterPosition)
+            }
+        }
+    }
+
+    interface AtivoListener {
+        fun onItemClick(pos: Int)
     }
 }

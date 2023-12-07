@@ -13,4 +13,7 @@ interface AtivoDAO {
 
     @Query("SELECT * FROM ativo ORDER BY nome")
     fun getAllAssets(): LiveData<List<Ativo>>
+
+    @Query("SELECT * FROM ativo WHERE id=:id")
+    fun getAssetById(id: Int): LiveData<Ativo>
 }

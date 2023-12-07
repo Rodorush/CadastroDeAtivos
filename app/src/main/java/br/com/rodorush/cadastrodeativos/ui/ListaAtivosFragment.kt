@@ -51,5 +51,20 @@ class ListaAtivosFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         ativoAdapter = AtivoAdapter()
         recyclerView.adapter = ativoAdapter
+
+        val listener = object : AtivoAdapter.AtivoListener {
+            override fun onItemClick(pos: Int) {
+                val a = ativoAdapter.ativosListaFilterable[pos]
+
+                val bundle = Bundle()
+                bundle.putInt("idAtivo", a.id)
+
+                findNavController().navigate(
+                    R.id.action_listaAtivosFragment_to_detalheFragment,
+                    bundle
+                )
+            }
+        }
+        ativoAdapter.setClickLestener(listener)
     }
 }

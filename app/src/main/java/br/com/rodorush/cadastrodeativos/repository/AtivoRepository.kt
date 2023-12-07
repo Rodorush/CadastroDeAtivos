@@ -13,4 +13,8 @@ class AtivoRepository(private val ativoDAO: AtivoDAO) {
     fun getAllAssets(): LiveData<List<Ativo>> {
         return ativoDAO.getAllAssets()
     }
+
+    fun getAssetById(id: Int): LiveData<Ativo> {
+        return ativoDAO.getAssetById(id)
+    }
 }

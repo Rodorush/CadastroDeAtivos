@@ -9,4 +9,6 @@
     <string name="mercado_do_ativo">Mercado do Ativo</string>
     <string name="sigla_do_ativo">Sigla do Ativo</string>
     <string name="salvar">Salvar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
