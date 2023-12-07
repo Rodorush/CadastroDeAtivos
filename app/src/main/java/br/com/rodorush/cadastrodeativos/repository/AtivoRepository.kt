@@ -10,6 +10,14 @@ class AtivoRepository(private val ativoDAO: AtivoDAO) {
         ativoDAO.insert(ativo)
     }
 
+    suspend fun update(ativo: Ativo) {
+        ativoDAO.update(ativo)
+    }
+
+    suspend fun delete(ativo: Ativo) {
+        ativoDAO.delete(ativo)
+    }
+
     fun getAllAssets(): LiveData<List<Ativo>> {
         return ativoDAO.getAllAssets()
     }
