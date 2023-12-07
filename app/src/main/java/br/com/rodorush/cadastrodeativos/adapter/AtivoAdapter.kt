@@ -2,19 +2,20 @@ package br.com.rodorush.cadastrodeativos.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import br.com.rodorush.cadastrodeativos.databinding.AtivoCelulaBinding
 import br.com.rodorush.cadastrodeativos.model.Ativo
 
-class AtivoAdapter():
-    RecyclerView.Adapter<AtivoAdapter.AtivoViewHolder>() {
+class AtivoAdapter(): RecyclerView.Adapter<AtivoAdapter.AtivoViewHolder>(),
+    Filterable {
 
-        private lateinit var binding: AtivoCelulaBinding
+    var listener: AtivoListener? = null
+    var ativosLista = ArrayList<Ativo>()
+    var ativosListaFilterable = ArrayList<Ativo>()
 
-        var ativosLista = ArrayList<Ativo>()
-        var listener: AtivoListener? = null
-        var ativosListaFilterable = ArrayList<Ativo>()
+    private lateinit var binding: AtivoCelulaBinding
 
     fun updateList(newList: ArrayList<Ativo> ) {
         ativosLista = newList
@@ -40,7 +41,7 @@ class AtivoAdapter():
     }
 
     override fun getItemCount(): Int {
-        return ativosLista.size
+        return ativosListaFilterable.size
     }
 
     inner class AtivoViewHolder(view:AtivoCelulaBinding): RecyclerView.ViewHolder(view.root) {
@@ -56,5 +57,30 @@ class AtivoAdapter():
 
     interface AtivoListener {
         fun onItemClick(pos: Int)
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+
+            override fun performFiltering(p0: CharSequence?): FilterResults {
+                if (p0.toString().isEmpty())
+                    ativosListaFilterable = ativosLista
+                else {
+                    val resultList = ArrayList<Ativo>()
+                    for (row in ativosLista)
+                        if (row.sigla.lowercase().contains(p0.toString().lowercase()))
+                            resultList.add(row)
+                    ativosListaFilterable = resultList
+                }
+                    val filterResults = FilterResults()
+                    filterResults.values = ativosListaFilterable
+                    return filterResults
+                }
+
+            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+                ativosListaFilterable = p1?.values as ArrayList<Ativo>
+                notifyDataSetChanged()
+            }
+        }
     }
 }
